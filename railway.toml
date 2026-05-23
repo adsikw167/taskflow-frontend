@@ -1,7 +1,7 @@
 [build]
 builder = "NIXPACKS"
-buildCommand = "npm install && npm run build"
+buildCommand = "npm install && node ./node_modules/vite/bin/vite.js build"
 
 [deploy]
-startCommand = "npx serve dist -p $PORT"
+startCommand = "npx serve -s dist -p $PORT"
 restartPolicyType = "ON_FAILURE"
