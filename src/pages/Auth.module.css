@@ -1,0 +1,72 @@
+.authPage {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: var(--bg);
+  background-image: radial-gradient(ellipse at 20% 50%, rgba(124,106,255,0.06) 0%, transparent 60%),
+                    radial-gradient(ellipse at 80% 20%, rgba(45,212,160,0.04) 0%, transparent 50%);
+}
+
+.authCard {
+  width: 100%;
+  max-width: 400px;
+  background: var(--bg-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  animation: fadeIn 0.3s ease;
+}
+
+.authHeader {
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.authLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.authLogoText {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.authTitle {
+  font-size: 24px;
+  margin-bottom: 6px;
+}
+
+.authSubtitle {
+  color: var(--text-2);
+  font-size: 14px;
+}
+
+.authForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.authSwitch {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-2);
+}
+
+.authLink {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.authLink:hover {
+  text-decoration: underline;
+}

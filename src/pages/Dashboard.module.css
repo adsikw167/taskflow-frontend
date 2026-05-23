@@ -1,0 +1,112 @@
+.dashboard { max-width: 1100px; }
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  gap: 16px;
+}
+
+.title { font-size: 28px; margin-bottom: 4px; }
+.subtitle { color: var(--text-2); font-size: 14px; }
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.statCard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.statCard:hover { transform: translateY(-2px); }
+
+.statIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.statValue {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.statLabel { font-size: 12px; color: var(--text-2); font-weight: 500; }
+
+.mainGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.sectionTitle {
+  font-size: 15px;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+.statusList { display: flex; flex-direction: column; gap: 12px; }
+
+.statusRow { display: flex; flex-direction: column; gap: 6px; }
+
+.statusMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.statusCount { font-size: 13px; font-weight: 600; color: var(--text-2); }
+
+.progressBar {
+  height: 4px;
+  background: var(--bg-3);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.6s ease;
+}
+
+.taskList { display: flex; flex-direction: column; }
+
+.taskRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  gap: 12px;
+}
+
+.taskRow:last-child { border-bottom: none; }
+
+.taskInfo { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.taskTitle { font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.taskProject { font-size: 11px; color: var(--text-3); }
+
+.taskMeta { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+
+@media (max-width: 1024px) {
+  .statsGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .mainGrid { grid-template-columns: 1fr; }
+  .header { flex-direction: column; }
+}
