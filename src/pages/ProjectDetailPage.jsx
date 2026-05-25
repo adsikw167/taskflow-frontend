@@ -225,7 +225,7 @@ export default function ProjectDetailPage() {
   const [showAddMember, setShowAddMember] = useState(false);
   const [filterStatus, setFilterStatus] = useState('');
 
-  const isAdmin = project?.members?.find(m => m.user && m.user._id === user?._id)?.role === 'admin';
+  const isAdmin = user?.isGlobalAdmin || project?.members?.find(m => m.user && m.user._id === user?._id)?.role === 'admin';
 
   useEffect(() => {
     Promise.all([
