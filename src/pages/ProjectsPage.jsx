@@ -127,18 +127,18 @@ export default function ProjectsPage() {
               {project.description && <p className={styles.projectDesc}>{project.description}</p>}
               <div className={styles.cardFooter}>
                 <div className={styles.members}>
-                  {project.members.slice(0, 4).map(m => (
+                  {project.members.filter(m => m.user).slice(0, 4).map(m => (
                     <div key={m.user._id} className="avatar" style={{ width: 24, height: 24, fontSize: 10, marginLeft: -6, border: '2px solid var(--bg-1)' }}>
                       {m.user.name?.[0]?.toUpperCase()}
                     </div>
                   ))}
-                  {project.members.length > 4 && (
+                  {project.members.filter(m => m.user).length > 4 && (
                     <div className="avatar" style={{ width: 24, height: 24, fontSize: 10, marginLeft: -6, border: '2px solid var(--bg-1)', background: 'var(--bg-3)', color: 'var(--text-2)' }}>
-                      +{project.members.length - 4}
+                      +{project.members.filter(m => m.user).length - 4}
                     </div>
                   )}
                 </div>
-                <span className={styles.memberCount}>{project.members.length} member{project.members.length !== 1 ? 's' : ''}</span>
+                <span className={styles.memberCount}>{project.members.filter(m => m.user).length} member{project.members.filter(m => m.user).length !== 1 ? 's' : ''}</span>
               </div>
             </Link>
           ))}
