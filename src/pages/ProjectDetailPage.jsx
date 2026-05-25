@@ -225,7 +225,7 @@ export default function ProjectDetailPage() {
   const [showAddMember, setShowAddMember] = useState(false);
   const [filterStatus, setFilterStatus] = useState('');
 
-  const isAdmin = project?.members?.find(m => m.user._id === user?._id)?.role === 'admin';
+  const isAdmin = project?.members?.find(m => m.user && m.user._id === user?._id)?.role === 'admin';
 
   useEffect(() => {
     Promise.all([
@@ -443,9 +443,9 @@ export default function ProjectDetailPage() {
       {/* Members View */}
       {activeTab === 'members' && (
         <div className="card" style={{ maxWidth: 600 }}>
-          <h3 style={{ marginBottom: 16, fontSize: 15 }}>Team Members ({project?.members?.length})</h3>
+          <h3 style={{ marginBottom: 16, fontSize: 15 }}>Team Members ({project?.members?.filter(m => m.user).length})</h3>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            {project?.members?.map(m => (
+            {project?.members?.filter(m => m.user).map(m => (
               <div key={m.user._id} className={styles.memberRow}>
                 <div className="avatar">{m.user.name?.[0]?.toUpperCase()}</div>
                 <div className={styles.memberInfo}>
