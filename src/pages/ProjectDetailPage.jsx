@@ -164,8 +164,14 @@ function AddMemberModal({ projectId, onClose, onAdd }) {
     setLoading(true);
     try {
       const res = await api.post(`/projects/${projectId}/members`, form);
-      onAdd(res.data.data);
-      toast.success('Member added!');
+      if (res.data.data) {
+        // User was added directly
+        onAdd(res.data.data);
+        toast.success('Member added!');
+      } else {
+        // Invitation was sent
+        toast.success(res.data.message || 'Invitation sent!');
+      }
       onClose();
     } catch (err) {
       toast.error(err.response?.data?.message || 'Failed to add member');
@@ -190,6 +196,9 @@ function AddMemberModal({ projectId, onClose, onAdd }) {
             <label className="label">Email Address</label>
             <input className="input-field" type="email" placeholder="team@example.com" value={form.email}
               onChange={e => setForm({ ...form, email: e.target.value })} required />
+            <p style={{ fontSize: 12, color: 'var(--text-3)', marginTop: 4 }}>
+              If user exists, they'll be added immediately. Otherwise, an invitation will be sent.
+            </p>
           </div>
           <div className="field">
             <label className="label">Role</label>
@@ -201,7 +210,7 @@ function AddMemberModal({ projectId, onClose, onAdd }) {
           <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end' }}>
             <button type="button" className="btn btn-ghost" onClick={onClose}>Cancel</button>
             <button type="submit" className="btn btn-primary" disabled={loading}>
-              {loading ? <div className="spinner" /> : 'Add Member'}
+              {loading ? <div className="spinner" /> : 'Add / Invite'}
             </button>
           </div>
         </form>
