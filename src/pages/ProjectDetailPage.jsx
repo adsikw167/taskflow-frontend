@@ -127,7 +127,7 @@ function TaskModal({ task, members, onClose, onSave, projectId }) {
               <label className="label">Assign To</label>
               <select className="input-field" value={form.assignedTo || ''} onChange={e => setForm({ ...form, assignedTo: e.target.value })}>
                 <option value="">Unassigned</option>
-                {members.map(m => <option key={m.user._id} value={m.user._id}>{m.user.name}</option>)}
+                {members.filter(m => m.user).map(m => <option key={m.user._id} value={m.user._id}>{m.user.name}</option>)}
               </select>
             </div>
             <div className="field">
