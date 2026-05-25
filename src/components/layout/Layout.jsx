@@ -1,4 +1,5 @@
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import styles from './Layout.module.css';
 
@@ -12,6 +13,7 @@ const NavItem = ({ to, icon, label }) => (
 export default function Layout() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   const handleLogout = () => {
     logout();
@@ -24,6 +26,46 @@ export default function Layout() {
 
   return (
     <div className={styles.layout}>
+      {/* Mobile Header */}
+      <div className={styles.mobileHeader}>
+        <div className={styles.logo}>
+          <svg width="24" height="24" viewBox="0 0 28 28" fill="none">
+            <rect width="28" height="28" rx="8" fill="#7c6aff" opacity="0.15"/>
+            <path d="M7 10h14M7 14h10M7 18h6" stroke="#7c6aff" strokeWidth="2" strokeLinecap="round"/>
+            <circle cx="21" cy="18" r="3" fill="#7c6aff"/>
+          </svg>
+          <span className={styles.logoText}>TaskFlow</span>
+        </div>
+        <button className="btn btn-ghost btn-icon" onClick={() => setShowMobileMenu(!showMobileMenu)}>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="1.5"/>
+            <circle cx="10" cy="8" r="2.5" stroke="currentColor" strokeWidth="1.5"/>
+            <path d="M5 16c0-2.761 2.239-5 5-5s5 2.239 5 5" stroke="currentColor" strokeWidth="1.5"/>
+          </svg>
+        </button>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      {showMobileMenu && (
+        <div className={styles.mobileMenuOverlay} onClick={() => setShowMobileMenu(false)}>
+          <div className={styles.mobileMenu} onClick={e => e.stopPropagation()}>
+            <div className={styles.userCard}>
+              <div className="avatar">{initials}</div>
+              <div className={styles.userInfo}>
+                <span className={styles.userName}>{user?.name}</span>
+                <span className={styles.userEmail}>{user?.email}</span>
+              </div>
+            </div>
+            <button className={`btn btn-ghost ${styles.logoutBtn}`} onClick={handleLogout}>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M5 2H3a1 1 0 00-1 1v8a1 1 0 001 1h2M9 10l3-3-3-3M12 7H5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              Logout
+            </button>
+          </div>
+        </div>
+      )}
+
       <aside className={styles.sidebar}>
         <div className={styles.logo}>
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
