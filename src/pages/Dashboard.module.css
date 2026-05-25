@@ -92,6 +92,14 @@
   padding: 10px 0;
   border-bottom: 1px solid var(--border);
   gap: 12px;
+  transition: background 0.2s;
+  border-radius: 6px;
+  margin: 0 -8px;
+  padding: 10px 8px;
+}
+
+.taskRow:hover {
+  background: var(--bg-2);
 }
 
 .taskRow:last-child { border-bottom: none; }

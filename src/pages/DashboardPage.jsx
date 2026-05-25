@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import api from '../utils/api';
 import { format, isValid } from 'date-fns';
@@ -21,6 +21,7 @@ const priorityColors = { low: '#60607a', medium: '#4db8ff', high: '#f5c842', urg
 
 export default function DashboardPage() {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -117,7 +118,12 @@ export default function DashboardPage() {
           ) : (
             <div className={styles.taskList}>
               {stats.recentTasks.map(task => (
-                <div key={task._id} className={styles.taskRow}>
+                <div 
+                  key={task._id} 
+                  className={styles.taskRow}
+                  onClick={() => navigate(`/projects/${task.project?._id}`)}
+                  style={{ cursor: 'pointer' }}
+                >
                   <div className={styles.taskInfo}>
                     <span className={styles.taskTitle}>{task.title}</span>
                     <span className={styles.taskProject}>{task.project?.name}</span>
